@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Press_Start_2P } from "next/font/google";
+import Nav from "@/components/Nav";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -28,7 +29,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="h-full">
         <div className="av-bg" />
         <div className="av-noise" />
-        {children}
+        <Nav />
+        <main className="av-main">{children}</main>
       </body>
     </html>
   );

@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
-import Nav from "@/components/Nav";
 import { GAMES, CATS } from "@/lib/mockData";
 
 interface GameCardProps {
@@ -84,9 +83,7 @@ export default function BibliotecaPage() {
   }, [q, cat]);
 
   return (
-    <>
-      <Nav />
-      <div className="fade-in">
+    <div className="fade-in">
         <section className="av-hero">
           <h1 className="flicker">ARCADE VAULT</h1>
           <div className="sub">
@@ -147,7 +144,6 @@ export default function BibliotecaPage() {
             </div>
           )}
         </div>
-      </div>
-    </>
+    </div>
   );
 }

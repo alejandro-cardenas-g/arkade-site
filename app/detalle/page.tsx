@@ -2,7 +2,6 @@
 
 import { Suspense, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Nav from "@/components/Nav";
 import { GAMES, seededScores } from "@/lib/mockData";
 
 function DetalleContent() {
@@ -131,11 +130,8 @@ function DetalleContent() {
 
 export default function DetallePage() {
   return (
-    <>
-      <Nav />
-      <Suspense fallback={<div className="av-detail fade-in" style={{ textAlign: "center", padding: 80 }}>Cargando...</div>}>
-        <DetalleContent />
-      </Suspense>
-    </>
+    <Suspense fallback={<div className="av-detail fade-in" style={{ textAlign: "center", padding: 80 }}>Cargando...</div>}>
+      <DetalleContent />
+    </Suspense>
   );
 }
