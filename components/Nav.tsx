@@ -42,6 +42,9 @@ export default function Nav() {
           <Link href="/salon" className={isActive("/salon") ? "active" : ""}>
             Salón de la Fama
           </Link>
+          <Link href="/about" className={isActive("/about") ? "active" : ""}>
+            Acerca de
+          </Link>
         </div>
         <div className="spacer"></div>
         <div className="coin-counter">
@@ -85,6 +88,12 @@ export default function Nav() {
           className={isActive("/salon") ? "active" : ""}
         >
           Salón de la Fama
+        </button>
+        <button
+          onClick={() => handleNavigate("/about")}
+          className={isActive("/about") ? "active" : ""}
+        >
+          Acerca de
         </button>
         <button
           onClick={() => handleNavigate("/auth")}
