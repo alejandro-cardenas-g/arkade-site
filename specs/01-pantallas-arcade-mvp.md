@@ -71,14 +71,14 @@ const rooms = [
 
 ## Acceptance Criteria
 
-- [ ] Estructura de Next.js 13+ (app directory) está creada
-- [ ] Existen 5 páginas funcionales (auth, biblioteca, salon, detalle, reproductor)
-- [ ] Nav component permite navegar a todas las pantallas sin errores
-- [ ] Cada pantalla renderiza con datos mockeados
-- [ ] No hay errores en consola
-- [ ] Estilos usan Tailwind (excepto componentes base con global styles)
-- [ ] Se puede acceder a cualquier ruta desde cualquier otra
-- [ ] `npm run dev` inicia sin problemas y app carga correctamente
+- [x] Estructura de Next.js 13+ (app directory) está creada
+- [x] Existen 5 páginas funcionales (auth, biblioteca, salon, detalle, reproductor)
+- [x] Nav component permite navegar a todas las pantallas sin errores
+- [x] Cada pantalla renderiza con datos mockeados
+- [x] No hay errores en consola
+- [x] Estilos usan Tailwind (excepto componentes base con global styles)
+- [x] Se puede acceder a cualquier ruta desde cualquier otra
+- [x] `npm run dev` inicia sin problemas y app carga correctamente
 
 ## Decisions Taken and Discarded
 
