@@ -401,14 +401,14 @@ a { color: inherit; text-decoration: none; }
 }
 .card .cover .label {
   position: absolute; left: 8px; bottom: 8px;
-  font-family: var(--pixel); font-size: 8px;
-  padding: 4px 6px;
-  background: rgba(0,0,0,0.8);
-  color: var(--cyan);
-  border: 1px solid var(--cyan);
+  font-family: var(--pixel); font-size: 10px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.95);
+  color: var(--magenta);
+  border: 2px solid var(--magenta);
   z-index: 10;
   pointer-events: none;
-  box-shadow: 0 0 8px rgba(0,245,255,0.6);
+  box-shadow: 0 0 12px rgba(255,0,110,0.8);
 }
 .card .meta { display: flex; flex-direction: column; gap: 6px; }
 .card .title {
@@ -595,8 +595,10 @@ a { color: inherit; text-decoration: none; }
 .detail-actions { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
 
 .leaderboard {
-  border: 1px solid var(--line);
+  border: 2px solid var(--magenta);
   background: var(--bg-2);
+  box-shadow: 0 0 16px rgba(255,0,110,0.4);
+  min-height: auto;
 }
 .leaderboard h3 {
   margin: 0;
