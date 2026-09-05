@@ -2,7 +2,6 @@
 
 import { Suspense, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Nav from "@/components/Nav";
 import { GAMES } from "@/lib/mockData";
 
 function ReproductorContent() {
@@ -56,9 +55,7 @@ function ReproductorContent() {
   }
 
   return (
-    <>
-      <Nav />
-      <div className="av-player fade-in">
+    <div className="av-player fade-in">
         <div className="player-hud">
           <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
             <div className="hud-stat">
@@ -182,18 +179,14 @@ function ReproductorContent() {
             </div>
           </div>
         )}
-      </div>
-    </>
+    </div>
     );
 }
 
 export default function ReproductorPage() {
   return (
-    <>
-      <Nav />
-      <Suspense fallback={<div className="av-player fade-in" style={{ textAlign: "center", padding: 80 }}>Cargando...</div>}>
-        <ReproductorContent />
-      </Suspense>
-    </>
+    <Suspense fallback={<div className="av-player fade-in" style={{ textAlign: "center", padding: 80 }}>Cargando...</div>}>
+      <ReproductorContent />
+    </Suspense>
   );
 }

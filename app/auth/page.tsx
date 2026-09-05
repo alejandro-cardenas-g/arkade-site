@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Nav from "@/components/Nav";
 
 export default function AuthPage() {
   const router = useRouter();
@@ -17,9 +16,7 @@ export default function AuthPage() {
   };
 
   return (
-    <>
-      <Nav />
-      <div className="av-auth-wrap fade-in">
+    <div className="av-auth-wrap fade-in">
         <div className="auth-card">
           <div className="auth-header">
             <div className="mark"></div>
@@ -121,7 +118,6 @@ export default function AuthPage() {
             AL ENTRAR ACEPTAS LOS TÉRMINOS DEL SALÓN ARCADE
           </div>
         </div>
-      </div>
-    </>
+    </div>
   );
 }
