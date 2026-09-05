@@ -1,6 +1,6 @@
 # Spec 01: Pantallas visuales del MVP de Arcade Vault
 
-**State:** Approved  
+**State:** Implemented  
 **Date:** 2026-09-04  
 **Objective:** Implementar la interfaz visual de todas las pantallas del MVP de Arcade Vault con navegación libre entre ellas.
 
