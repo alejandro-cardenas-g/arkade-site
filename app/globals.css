@@ -400,15 +400,21 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--line-2);
 }
 .card .cover .label {
-  position: absolute; left: 8px; bottom: 8px;
-  font-family: var(--pixel); font-size: 10px;
-  padding: 6px 10px;
-  background: rgba(0,0,0,0.95);
-  color: var(--magenta);
-  border: 2px solid var(--magenta);
-  z-index: 10;
-  pointer-events: none;
-  box-shadow: 0 0 12px rgba(255,0,110,0.8);
+  position: absolute !important;
+  left: 8px !important;
+  bottom: 8px !important;
+  font-family: var(--pixel) !important;
+  font-size: 10px !important;
+  padding: 6px 10px !important;
+  background: rgba(0,0,0,0.95) !important;
+  color: var(--magenta) !important;
+  border: 2px solid var(--magenta) !important;
+  z-index: 10 !important;
+  pointer-events: none !important;
+  box-shadow: 0 0 12px rgba(255,0,110,0.8) !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 .card .meta { display: flex; flex-direction: column; gap: 6px; }
 .card .title {
