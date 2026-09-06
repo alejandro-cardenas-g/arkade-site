@@ -38,16 +38,21 @@ const AsteroidsGame = forwardRef<AsteroidsGameHandle, AsteroidsGameProps>(
       canvas.width = 800;
       canvas.height = 600;
 
-      const loadGame = async () => {
-        // Load game.js script
+      let scriptLoaded = false;
+
+      const loadGame = () => {
         if (!(window as any).AsteroidsGame) {
           const script = document.createElement("script");
           script.src = "/games/asteroids/game.js";
           script.async = true;
           script.onload = () => {
+            scriptLoaded = true;
             const AsteroidsGameClass = (window as any).AsteroidsGame;
             gameRef.current = new AsteroidsGameClass(canvas, callbacks);
             gameRef.current.start();
+          };
+          script.onerror = () => {
+            console.error("Failed to load game.js");
           };
           document.body.appendChild(script);
         } else {
