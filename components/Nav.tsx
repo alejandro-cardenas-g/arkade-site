@@ -11,7 +11,13 @@ export default function Nav() {
 
   const isActive = (href: string) => {
     if (href === "/" && pathname === "/") return true;
-    if (href !== "/" && pathname.startsWith(href)) return true;
+    if (
+      href === "/biblioteca" &&
+      (pathname.startsWith("/biblioteca") || pathname.startsWith("/games/"))
+    )
+      return true;
+    if (href !== "/" && href !== "/biblioteca" && pathname.startsWith(href))
+      return true;
     return false;
   };
 
@@ -71,10 +77,16 @@ export default function Nav() {
         onClick={() => setMobileOpen(false)}
       ></div>
       <aside className={`av-mobile-panel${mobileOpen ? " open" : ""}`}>
-        <div className="pixel neon-cyan" style={{ fontSize: 11, marginBottom: 16 }}>
+        <div
+          className="pixel neon-cyan"
+          style={{ fontSize: 11, marginBottom: 16 }}
+        >
           MENÚ
         </div>
-        <button onClick={() => handleNavigate("/")} className={isActive("/") ? "active" : ""}>
+        <button
+          onClick={() => handleNavigate("/")}
+          className={isActive("/") ? "active" : ""}
+        >
           Inicio
         </button>
         <button
@@ -104,7 +116,11 @@ export default function Nav() {
         <div style={{ flex: 1 }}></div>
         <div
           className="pixel"
-          style={{ fontSize: 9, color: "var(--ink-faint)", letterSpacing: "0.16em" }}
+          style={{
+            fontSize: 9,
+            color: "var(--ink-faint)",
+            letterSpacing: "0.16em",
+          }}
         >
           CRÉDITOS · 03
         </div>
