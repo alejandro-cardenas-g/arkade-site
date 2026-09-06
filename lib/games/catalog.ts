@@ -28,6 +28,12 @@ export const GAME_CATALOG: GameCatalog[] = [
     description: "Juego clásico de romper bloques",
     route: "/games/arkanoid",
   },
+  {
+    id: "snake",
+    name: "Snake",
+    description: "Juego clásico de serpiente que crece",
+    route: "/games/snake",
+  },
 ];
 
 // Helper functions
