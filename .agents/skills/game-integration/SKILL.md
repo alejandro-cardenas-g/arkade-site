@@ -14,6 +14,18 @@ Este skill automatiza la integración de un juego nuevo en la arcade app, desde 
 
 **Patrón base:** extendido de `specs/05-integracion-juego-asteroids.md` y `specs/06-leaderboard-y-tabla-juegos.md`.
 
+## Metodología Spec-Driven Design (SDD)
+
+Este skill **DEBE usar la metodología Spec-Driven Design completa**, con las siguientes etapas:
+
+1. **Fase de Especificación (`/spec`):** Crear el spec completo con el skill `/spec`, haciendo preguntas puntuales para desambiguar requisitos. El spec documentará la integración de forma canónica.
+2. **Cambio de rama:** Crear y cambiar a una rama `feat/integracion-juego-<slug>` antes de implementar.
+3. **Fase de Implementación (`/spec-impl`):** Usar el skill `/spec-impl` para ejecutar el Implementation Plan del spec, **verificando el output paso a paso**:
+   - Después de cada paso mayor (adaptar `game.js`, crear wrapper React, registrar en Supabase, etc.), hacer una pregunta de verificación al usuario.
+   - Mostrar el código generado o los cambios realizados.
+   - Pedir confirmación explícita o retroalimentación antes de continuar al siguiente paso.
+4. **Cierre:** Hacer PR contra `main`, vincular el spec y la implementación.
+
 ## Flujo de ejecución
 
 ### Fase 1: Contexto y análisis del juego
@@ -50,7 +62,9 @@ Usar `AskUserQuestion` para estas preguntas.
 
 ### Fase 3: Generación del spec
 
-Crear `specs/NN-integracion-juego-<slug>.md` con estructura idéntica a los specs 05/06:
+**Usar el skill `/spec` para generar el spec completo.**
+
+El `/spec` debe producir `specs/NN-integracion-juego-<slug>.md` con estructura idéntica a los specs 05/06:
 
 - **Header:** State=Draft, Depends on=Spec 04 (Supabase), Objective (una línea: "Integrar el juego <Nombre> en la aplicación...").
 - **Scope:** In/Out — heredar del spec 05/06, adaptar solo nombres.
@@ -62,11 +76,38 @@ Crear `specs/NN-integracion-juego-<slug>.md` con estructura idéntica a los spec
 
 **Lenguaje:** español, estilo/convenciones idénticas a specs 05/06.
 
-No pedir confirmación sección por sección — generar el spec completo de una vez (el patrón es heredado, no hay diseño nuevo a refinar).
+**Proceso:**
 
-### Fase 4: Implementación
+1. Invocar `/spec` con el contexto de la integración (juego, análisis inicial del game.js, metadatos).
+2. El skill `/spec` hará preguntas puntuales si es necesario — **responder con los metadatos recopilados en Fase 2**.
+3. Validar que el spec generado captura correctamente el plan de implementación.
+4. No pedir confirmación sección por sección — generar el spec completo de una vez (el patrón es heredado, no hay diseño nuevo a refinar).
 
-Ejecutar siguiendo el Implementation Plan del spec recién generado:
+### Fase 4: Cambio de rama
+
+Antes de implementar:
+
+1. **Crear y cambiar a rama:** `git checkout -b feat/integracion-juego-<slug>`
+2. Esta rama será usada por `/spec-impl` para los cambios de implementación.
+
+### Fase 5: Implementación (usando `/spec-impl`)
+
+**Usar el skill `/spec-impl` para ejecutar el Implementation Plan del spec.**
+
+El `/spec-impl` debe automatizar los pasos siguiendo el plan, **con verificación paso a paso**:
+
+#### Proceso de verificación:
+
+Después de cada paso mayor (ej. adaptar `game.js`, crear wrapper React, insertar en Supabase), el skill DEBE:
+
+1. **Mostrar el código/cambios realizados** — qué archivos fueron creados/modificados, extractos del código.
+2. **Hacer una pregunta explícita de verificación** al usuario:
+   - "¿Se ve bien el wrapper React? ¿Necesitas ajustes antes de continuar?"
+   - "¿Coincide el código adaptado de `game.js` con lo esperado?"
+   - "¿La fila en Supabase se insertó correctamente? ¿Quieres verificar antes de seguir?"
+3. **Permitir retroalimentación antes de continuar** — si el usuario identifica un error o quiere cambios, hacer ajustes antes del siguiente paso.
+
+#### Ejecución detallada:
 
 #### 4.1. Adaptar `game.js` a la clase canónica
 
@@ -147,7 +188,9 @@ Template base: copia adaptada de `app/games/asteroids/page.tsx`, cambiar nombres
   - No hay que crear políticas RLS nuevas — las existentes ya cubren writes/reads públicos en `game_scores`.
 - Antes de insertar, listar tablas (`mcp__supabase__list_tables`) para confirmar que `games` y `game_scores` existen con sus columnas correctas.
 
-### Fase 5: Verificación
+### Fase 6: Verificación end-to-end
+
+Después de que `/spec-impl` complete todos los pasos:
 
 - Iniciar dev server: `npm run dev`.
 - Navegar a `/biblioteca` → debe aparecer card nueva del juego.
@@ -158,12 +201,20 @@ Template base: copia adaptada de `app/games/asteroids/page.tsx`, cambiar nombres
 - Verificar que nav muestra `/games/<id>` como parte de Biblioteca.
 - No hay errores en la consola del navegador.
 
-### Fase 6: Cierre
+**Hacer una pregunta final:** "¿Funciona todo correctamente? ¿Hay algo que ajustar antes de hacer el commit final?"
 
-- Actualizar el spec recién creado:
+### Fase 7: Cierre y PR
+
+- **Actualizar el spec:**
   - Cambiar `State: Draft` → `State: Implemented`.
   - Marcar todos los checkboxes de Acceptance Criteria como `[x]`.
-- Hacer commit con mensaje tipo: `feat: implement <Name> game integration with leaderboard`.
+- **Hacer commit en la rama** `feat/integracion-juego-<slug>`:
+  - Mensaje: `feat: implement <Name> game integration with leaderboard`
+  - Incluir referencia al spec: `Implements spec NN-integracion-juego-<slug>`
+- **Crear PR contra `main`:**
+  - Título: `feat: Integrate <Name> game with leaderboard`
+  - Descripción: enlazar el spec, resumir cambios principales.
+  - El PR debe incluir todos los archivos nuevos/modificados en `app/games/<id>/`, `public/games/<id>/`, cambios en `lib/games/catalog.ts`, y el spec nuevo en `specs/`.
 
 ## Estructura de archivos finales
 
