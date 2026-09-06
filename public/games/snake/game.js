@@ -67,6 +67,10 @@ class SnakeGame {
     // Event listeners
     this.boundKeydown = this.handleKeydown.bind(this);
     this.boundArrowKey = this.handleArrowKey.bind(this);
+
+    // Pre-load fruit image
+    this.fruitImage = new Image();
+    this.fruitImage.src = "/games/snake/assets/fruits.png";
   }
 
   start() {
@@ -316,14 +320,12 @@ class SnakeGame {
     if (this.food && window.SPRITE_ATLAS) {
       const foodCoords = window.SPRITE_ATLAS.fruits[this.foodType];
       if (foodCoords) {
-        const foodImg = new Image();
-        foodImg.src = "/games/snake/assets/fruits.png";
         const fx = this.food.x * this.gridSize;
         const fy = this.food.y * this.gridSize;
 
-        if (foodImg.complete) {
+        if (this.fruitImage.complete) {
           this.ctx.drawImage(
-            foodImg,
+            this.fruitImage,
             foodCoords.x,
             foodCoords.y,
             foodCoords.w,
@@ -426,5 +428,9 @@ class SnakeGame {
   }
 }
 
-module.exports = SnakeGame;
-window.SnakeGame = SnakeGame;
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = SnakeGame;
+}
+if (typeof window !== "undefined") {
+  window.SnakeGame = SnakeGame;
+}

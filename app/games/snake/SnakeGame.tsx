@@ -38,39 +38,39 @@ const SnakeGame = forwardRef<SnakeGameHandle, SnakeGameProps>(
       canvas.width = 640;
       canvas.height = 480;
 
-      let scriptLoaded = false;
-
       const loadGame = () => {
-        if (!(window as any).SnakeGame) {
-          // Load sprite atlas first
-          const spriteScript = document.createElement("script");
-          spriteScript.src = "/games/snake/sprites.js";
-          spriteScript.async = true;
-          spriteScript.onload = () => {
-            // Then load game script
-            const gameScript = document.createElement("script");
-            gameScript.src = "/games/snake/game.js";
-            gameScript.async = true;
-            gameScript.onload = () => {
-              scriptLoaded = true;
-              const SnakeGameClass = (window as any).SnakeGame;
+        // Load sprite atlas and game in sequence
+        const spriteScript = document.createElement("script");
+        spriteScript.src = "/games/snake/sprites.js";
+        spriteScript.async = false;
+
+        spriteScript.onload = () => {
+          const gameScript = document.createElement("script");
+          gameScript.src = "/games/snake/game.js";
+          gameScript.async = false;
+
+          gameScript.onload = () => {
+            const SnakeGameClass = (window as any).SnakeGame;
+            if (SnakeGameClass) {
               gameRef.current = new SnakeGameClass(canvas, callbacks);
               gameRef.current.start();
-            };
-            gameScript.onerror = () => {
-              console.error("Failed to load game.js");
-            };
-            document.body.appendChild(gameScript);
+            } else {
+              console.error("SnakeGame class not found after loading script");
+            }
           };
-          spriteScript.onerror = () => {
-            console.error("Failed to load sprites.js");
+
+          gameScript.onerror = () => {
+            console.error("Failed to load game.js");
           };
-          document.body.appendChild(spriteScript);
-        } else {
-          const SnakeGameClass = (window as any).SnakeGame;
-          gameRef.current = new SnakeGameClass(canvas, callbacks);
-          gameRef.current.start();
-        }
+
+          document.body.appendChild(gameScript);
+        };
+
+        spriteScript.onerror = () => {
+          console.error("Failed to load sprites.js");
+        };
+
+        document.body.appendChild(spriteScript);
       };
 
       loadGame();
