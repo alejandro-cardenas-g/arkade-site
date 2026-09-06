@@ -16,6 +16,12 @@ export const GAME_CATALOG: GameCatalog[] = [
     description: "Juego clásico de asteroides",
     route: "/games/asteroids",
   },
+  {
+    id: "tetris",
+    name: "Tetris",
+    description: "Juego clásico de bloques que caen",
+    route: "/games/tetris",
+  },
 ];
 
 // Helper functions
