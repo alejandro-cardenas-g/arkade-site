@@ -22,6 +22,12 @@ export const GAME_CATALOG: GameCatalog[] = [
     description: "Juego clásico de bloques que caen",
     route: "/games/tetris",
   },
+  {
+    id: "arkanoid",
+    name: "Arkanoid",
+    description: "Juego clásico de romper bloques",
+    route: "/games/arkanoid",
+  },
 ];
 
 // Helper functions
